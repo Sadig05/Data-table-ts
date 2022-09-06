@@ -11,8 +11,14 @@ interface IProps {
 }
 
 const EditUserModal = ({ user }: IProps) => {
-    
-    const genders = ["Male", "Female", "Genderfluid", "Non-binary", "Genderqueer", "Polygender"];
+  const genders = [
+    "Male",
+    "Female",
+    "Genderfluid",
+    "Non-binary",
+    "Genderqueer",
+    "Polygender",
+  ];
   const { userStore } = useStore();
   const { Item, useForm } = Form;
   const [updateForm] = useForm();
@@ -39,10 +45,15 @@ const EditUserModal = ({ user }: IProps) => {
       <Button onClick={toggleEditModal}>Edit</Button>
 
       <Modal
+        okButtonProps={{
+          style: {
+            display: "none",
+          },
+        }}
         visible={visible}
         title="Edit user"
         onCancel={toggleEditModal}
-        onOk={toggleEditModal}
+        // onOk={toggleEditModal}
       >
         <Form
           form={updateForm}
@@ -55,6 +66,7 @@ const EditUserModal = ({ user }: IProps) => {
             first_name: user.first_name,
             last_name: user.last_name,
             email: user.email,
+            gender: user.gender,
             ip_address: user.ip_address,
           }}
           onFinish={onFinish}
@@ -87,11 +99,13 @@ const EditUserModal = ({ user }: IProps) => {
             <Input />
           </Form.Item>
 
-          <Form.Item label="Gender"
-
-          >
-
-            <Select defaultValue={user.gender}>
+          <Form.Item label="Gender" name="gender">
+            <Select
+              defaultValue={user.gender}
+              onChange={(value) => {
+                user.gender = value;
+              }}
+            >
               <Select.Option value="Male">Male</Select.Option>
               <Select.Option value="Female">Female</Select.Option>
               <Select.Option value="Genderfluid">Genderfluid</Select.Option>
@@ -110,7 +124,7 @@ const EditUserModal = ({ user }: IProps) => {
           </Form.Item>
 
           <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-            <Button type="primary" htmlType="submit">
+            <Button onClick={toggleEditModal} type="primary" htmlType="submit">
               Submit
             </Button>
           </Form.Item>

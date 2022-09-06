@@ -6,7 +6,7 @@ import { FilterConfirmProps, FilterDropdownProps,} from "antd/lib/table/interfac
 import { IFilter, IUser } from "../models/User";
 import { useStore } from "../stores/RootStore";
 import ButtonGroup from "antd/lib/button/button-group";
-
+import AddUserModal from '../components/AddUserModal';
 import EditUserModal from '../components/EditUserModal';
 
 const Users = () => {
@@ -19,7 +19,7 @@ const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   
 
   const onAddUser = () => {
-    console.log("new student");
+   
   };
 
   const onEditUser =(user: IUser) => {
@@ -150,7 +150,7 @@ const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
         return (
           <>
            <EditUserModal user={user} />
-
+           
             
             <DeleteOutlined
               onClick={() => {
@@ -203,7 +203,8 @@ const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   return (
     <div className="App">
-      <Button onClick={onAddUser}>Add user</Button>
+      {/* <Button onClick={onAddUser}>Add user</Button> */}
+      <AddUserModal/>
 
       <Table
         pagination={{

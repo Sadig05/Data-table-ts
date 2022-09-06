@@ -5,7 +5,11 @@ const baseUrl = `http://localhost:3004/users`;
 class UserService {
   getData = async (params: IFilter) => {
     const request = await axios.get(baseUrl, {
-      params,
+      params: {
+        ...params,
+        "_sort": "id",
+        "_order": "desc"
+      },
     });
     return request;
   };
