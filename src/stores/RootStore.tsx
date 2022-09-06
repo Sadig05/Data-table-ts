@@ -1,6 +1,10 @@
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, configure } from "mobx";
 import { createContext , ReactNode, useContext} from "react";
 import UserStore from "./UserStore";
+
+configure({
+  enforceActions: "never"
+})
 
 export class RootStore {
   userStore: UserStore;

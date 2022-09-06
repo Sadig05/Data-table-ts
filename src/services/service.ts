@@ -1,5 +1,5 @@
 import axios from "axios";
-import { IFilter } from "../models/User";
+import { IFilter, IUser } from "../models/User";
 const baseUrl = `http://localhost:3004/users`;
 
 class UserService {
@@ -9,6 +9,22 @@ class UserService {
     });
     return request;
   };
+
+  postData = async (user: IUser) => {
+    const response = await axios.post(baseUrl, user);
+    return response;
+  }
+
+  editData = async(user: IUser) => {
+    const response = await axios.put(`${baseUrl}/${user.id}`, {...user})
+    return response
+  }
+
+  deleteData = async(id: number) => {
+   const response = await axios.delete(`${baseUrl}/${id}`);
+   return response
+  }
+
 }
 
 export default UserService;
